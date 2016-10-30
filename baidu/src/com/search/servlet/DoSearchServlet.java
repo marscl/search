@@ -24,13 +24,18 @@ public class DoSearchServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
 		String key=req.getParameter("key");
+		String currentPage=req.getParameter("currentPage");
+		if(currentPage==null||"".equals(currentPage))currentPage="2";
+		int first=(Integer.parseInt(currentPage)-1)*10+1;
 		//String url="http://cn.bing.com/search?q=site:pan.baidu.com "+key;
-		String url="http://cn.bing.com/search?q=site%3Apan.baidu.com+"+key;
+		String url="http://cn.bing.com/search?q=site%3Apan.baidu.com+"+key+"&first="+first;
 		Spider spider=new Spider();
 		List<Message> list=spider.getList(url);
-		System.out.println(list);
-		resp.sendRedirect(url);
+		req.setAttribute("list", list);
+		req.getRequestDispatcher("content.jsp").forward(req, resp);
+		//resp.sendRedirect("content.jsp?currentPage="+list);
 		return;
 	}
 	
