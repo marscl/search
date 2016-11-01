@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.search.entitys.Message;
 import com.search.impl.Spider;
 
+import net.sf.json.JSONArray;
+
 /** 
 *
 * @author CL
@@ -27,7 +29,7 @@ public class DoSearchServlet extends HttpServlet {
 		req.setCharacterEncoding("utf-8");
 		String key=req.getParameter("key");
 		String currentPage=req.getParameter("currentPage");
-		if(currentPage==null||"".equals(currentPage))currentPage="2";
+		if(currentPage==null||"".equals(currentPage))currentPage="0";
 		int first=(Integer.parseInt(currentPage)-1)*10+1;
 		//String url="http://cn.bing.com/search?q=site:pan.baidu.com "+key;
 		String url="http://cn.bing.com/search?q=site%3Apan.baidu.com+"+key+"&first="+first;
@@ -35,7 +37,6 @@ public class DoSearchServlet extends HttpServlet {
 		List<Message> list=spider.getList(url);
 		req.setAttribute("list", list);
 		req.getRequestDispatcher("content.jsp").forward(req, resp);
-		//resp.sendRedirect("content.jsp?currentPage="+list);
 		return;
 	}
 	

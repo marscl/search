@@ -1,19 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-	#container{
-		position:absolute;
-		left:50%;
-		top:50%;
-		margin-left:-100px;
-		margin-top:-50px;
-	}
-</style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css" type="text/css">
 <script type="text/javascript">
 	function search(){
 		clear();
@@ -62,9 +54,10 @@
 </head>
 <body>
 	<div id="container">
+		<div id="logo"></div>
 		<form action="doSearch" method="post">
 			<input type="text" id="keyword" onkeyup="search()" name="key">
-			<input type="submit" value="搜索一下">
+			<input type="submit" value="搜索一下" id="sub">
 			<ul id="advice">
 			</ul>
 		</form>
